@@ -6,9 +6,9 @@ public class StockThread implements Runnable {
     private String stockName;
     private double price;
 
-    private PostOffice threadOffice;
+    private Function threadOffice;
 
-    public StockThread(PostOffice pst, int newStartTime, String newStock, double newPrice){
+    public StockThread(Function pst, int newStartTime, String newStock, double newPrice){
       this.threadOffice = pst;
       this.startTime = newStartTime;
       this.stockName = newStock;
@@ -21,26 +21,25 @@ public class StockThread implements Runnable {
     public void run() {
 
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 1; i < 20; i++) {
             try {
                //sleep for 2 secs
                 Thread.sleep(2000);
 
             } catch (InterruptedException e) { }
 
-            double randomNumnber = (Math.random() * 3) - 6;
+            double randomNumnber = (Math.random() * (.06)) - .03;
             // Formats decimals to 2 places
             DecimalFormat df = new DecimalFormat("#.##");
 
-             price = Double.valueOf(df.format(price + randomNumnber));
-            if(stockName.equals("Apple")) threadOffice.setApplePrice(price);
-            else if (stockName.equals("Google")){
-                threadOffice.setGooglePrice(price);
-            }else if (stockName.equals("IBM")) threadOffice.setIBMPrice(price);
+             price =  Double.valueOf(df.format((price + randomNumnber)));
+            if(stockName.equals("Apple")) ((PostOffice)threadOffice).setApplePrice(price);
+            if (stockName.equals("Google")) ((PostOffice)threadOffice).setGooglePrice(price);
+            if (stockName.equals("IBM")) ((PostOffice)threadOffice).setIBMPrice(price);
 
 
 
-            System.out.println(stockName + ": " + df.format((price+randomNumnber)) + " " + df.format(randomNumnber));
+            System.out.println(stockName + ": " + df.format((price)) + " " + df.format((randomNumnber)));
 
             System.out.println();
 

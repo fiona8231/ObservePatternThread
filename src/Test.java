@@ -18,8 +18,8 @@ public class Test {
 
 
         Runnable thread1 = new StockThread(postOffice, 2,"Apple", 200);
-        Runnable  thread2 = new StockThread(postOffice, 2,"Google", 300);
-        Runnable  thread3 = new StockThread(postOffice, 2,"IBM", 150);
+        Runnable thread2 = new StockThread(postOffice, 2,"Google", 300);
+        Runnable thread3 = new StockThread(postOffice, 2,"IBM", 150);
 
       new Thread(thread1).start();
       new Thread(thread2).start();
